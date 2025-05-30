@@ -46,18 +46,20 @@ class HashMap {
   }
 
   get(key) {
-    // takes one argument as a key and returns the value that is assigned to this key. If a key is not found, return null.
+    // takes one argument as a key and returns the value that is assigned to this key.
+    // If a key is not found, return null.
+    const Bucket = this.Bucket;
     const bucketIndex = this.hash(key);
-    const checkLinkedList = this.Bucket[bucketIndex];
-    const linkedListSize = this.Bucket[bucketIndex].size();
+    const checkLinkedList = Bucket[bucketIndex];
+    const linkedListSize = Bucket[bucketIndex].size();
     console.log(checkLinkedList);
     console.log(linkedListSize);
     for (let i = 0; i < linkedListSize; i++) {
-      const checkKey = this.Bucket[bucketIndex].at(i).value[0];
-      const value = this.Bucket[bucketIndex].at(i).value[1];
-      console.log(checkKey, key);
+      const checkKey = Bucket[bucketIndex].at(i).value[0];
+      const value = Bucket[bucketIndex].at(i).value[1];
+      // console.log(checkKey, key);
       if (checkKey == key) {
-        console.log("key matches");
+        console.log("key: " + key + " value: " + value);
         return value;
       }
     }
@@ -67,6 +69,30 @@ class HashMap {
 
   has(key) {
     // takes a key as an argument and returns true or false based on whether or not the key is in the hash map.
+    const Bucket = this.Bucket;
+    const bucketLength = this.Bucket.length;
+
+    // traverse array of buckets
+    for (let i = 0; i < bucketLength; i++) {
+      if (Bucket[i] != undefined) {
+        // console.log(Bucket[i]);
+        const linkedListSize = Bucket[i].size();
+        // console.log("not empty");
+
+        for (let j = 0; j < linkedListSize; j++) {
+          const checkKey = Bucket[i].at(j).value[0];
+          // console.log(checkKey, key);
+          if (checkKey == key) {
+            console.log("hashmap has key: " + key);
+            return true;
+          }
+        }
+      }
+    }
+
+    console.error(key + " doesn't exist in hash map");
+
+    return false;
   }
 
   remove(key) {

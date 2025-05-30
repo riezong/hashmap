@@ -27,7 +27,9 @@ test.set("lion", "golden");
 
 console.log(test);
 
-console.log(test.get("grape"));
+test.get("grape");
+
+test.has("banana");
 
 // After populating your hash map with the data above, your hash map’s current load levels should now be at 0.75 (full capacity).
 
