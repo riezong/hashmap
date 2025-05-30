@@ -24,18 +24,15 @@ class HashMap {
     // convert key into hash code
     // use hash code to determine the appropriate bucket
     const bucketIndex = this.hash(key);
-    console.log(bucketIndex, value);
-    // this.Bucket[bucketIndex] = [key, value];
-    // console.log(this.Bucket);
 
     // Linked List: Each bucket can be the head of a linked list. Each node in the linked list would store a [key, value] pair.
 
     // You'll access the element at bucketIndex in your underlying array (which stores the buckets).
     // If that bucket is empty, you'll initialize it with a new linked list.
     if (this.Bucket[bucketIndex] === undefined) {
-      console.log("empty bucket");
+      // console.log("empty bucket");
       this.Bucket[bucketIndex] = new LinkedList();
-      console.log(this.Bucket[bucketIndex].size());
+      // console.log(this.Bucket[bucketIndex].size());
       this.Bucket[bucketIndex].append([key, value]);
       console.log(this.Bucket[bucketIndex].toString());
     } else {
@@ -50,6 +47,22 @@ class HashMap {
 
   get(key) {
     // takes one argument as a key and returns the value that is assigned to this key. If a key is not found, return null.
+    const bucketIndex = this.hash(key);
+    const checkLinkedList = this.Bucket[bucketIndex];
+    const linkedListSize = this.Bucket[bucketIndex].size();
+    console.log(checkLinkedList);
+    console.log(linkedListSize);
+    for (let i = 0; i < linkedListSize; i++) {
+      const checkKey = this.Bucket[bucketIndex].at(i).value[0];
+      const value = this.Bucket[bucketIndex].at(i).value[1];
+      console.log(checkKey, key);
+      if (checkKey == key) {
+        console.log("key matches");
+        return value;
+      }
+    }
+    console.error("key doesn't exist");
+    return null;
   }
 
   has(key) {

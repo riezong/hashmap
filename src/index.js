@@ -27,6 +27,8 @@ test.set("lion", "golden");
 
 console.log(test);
 
+console.log(test.get("grape"));
+
 // After populating your hash map with the data above, your hash map’s current load levels should now be at 0.75 (full capacity).
 
 // Now with a full hash map, try overwriting a few nodes using set(key, value). This should only overwrite the existing values of your nodes and not add new ones, so length() should still return the same value and capacity should remain the same.
