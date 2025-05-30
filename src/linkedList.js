@@ -155,7 +155,12 @@ class LinkedList {
   removeAt(index) {
     let prev = index - 1;
     let next = index + 1;
-    return (this.at(prev).nextNode = this.at(next));
+    if (this.size() <= 1) {
+      this.pop();
+      return this.at(prev).nextNode;
+    } else {
+      return (this.at(prev).nextNode = this.at(next));
+    }
   }
 }
 
