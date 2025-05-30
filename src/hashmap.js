@@ -139,22 +139,159 @@ class HashMap {
 
   length() {
     // returns the number of stored keys in the hash map.
+    let counter = 0;
+
+    const Bucket = this.Bucket;
+    const bucketLength = this.Bucket.length;
+
+    // traverse array of buckets
+    for (let bucketIndex = 0; bucketIndex < bucketLength; bucketIndex++) {
+      let currentBucket = Bucket[bucketIndex];
+
+      if (currentBucket != undefined) {
+        // console.log(Bucket[i]);
+        const linkedListSize = currentBucket.size();
+        // console.log("not empty");
+
+        // traverse linked list
+        for (
+          let linkedListIndex = 0;
+          linkedListIndex < linkedListSize;
+          linkedListIndex++
+        ) {
+          counter += 1;
+        }
+      }
+    }
+
+    console.log(counter);
+    return counter;
   }
 
   clear() {
     // removes all entries in the hash map.
+
+    const Bucket = this.Bucket;
+    const bucketLength = this.Bucket.length;
+
+    // traverse array of buckets
+    for (let bucketIndex = 0; bucketIndex < bucketLength; bucketIndex++) {
+      let currentBucket = Bucket[bucketIndex];
+
+      if (currentBucket != undefined) {
+        // console.log(Bucket[i]);
+        const linkedListSize = currentBucket.size();
+        // console.log("not empty");
+
+        // traverse linked list
+        for (
+          let linkedListIndex = 0;
+          linkedListIndex < linkedListSize;
+          linkedListIndex++
+        ) {
+          currentBucket.firstNode = null;
+        }
+      }
+    }
   }
 
   keys() {
     // returns an array containing all the keys inside the hash map.
+    const keyArray = [];
+
+    const Bucket = this.Bucket;
+    const bucketLength = this.Bucket.length;
+
+    // traverse array of buckets
+    for (let bucketIndex = 0; bucketIndex < bucketLength; bucketIndex++) {
+      let currentBucket = Bucket[bucketIndex];
+
+      if (currentBucket != undefined) {
+        // console.log(Bucket[i]);
+        const linkedListSize = currentBucket.size();
+        // console.log("not empty");
+
+        // traverse linked list
+        for (
+          let linkedListIndex = 0;
+          linkedListIndex < linkedListSize;
+          linkedListIndex++
+        ) {
+          const currentBucketCurrentListIndex =
+            currentBucket.at(linkedListIndex);
+          keyArray.push(currentBucketCurrentListIndex.value[0]);
+        }
+      }
+    }
+
+    console.log(keyArray);
+    return keyArray;
   }
 
   values() {
     // returns an array containing all the values.
+    const valueArray = [];
+
+    const Bucket = this.Bucket;
+    const bucketLength = this.Bucket.length;
+
+    // traverse array of buckets
+    for (let bucketIndex = 0; bucketIndex < bucketLength; bucketIndex++) {
+      let currentBucket = Bucket[bucketIndex];
+
+      if (currentBucket != undefined) {
+        // console.log(Bucket[i]);
+        const linkedListSize = currentBucket.size();
+        // console.log("not empty");
+
+        // traverse linked list
+        for (
+          let linkedListIndex = 0;
+          linkedListIndex < linkedListSize;
+          linkedListIndex++
+        ) {
+          const currentBucketCurrentListIndex =
+            currentBucket.at(linkedListIndex);
+          valueArray.push(currentBucketCurrentListIndex.value[1]);
+        }
+      }
+    }
+
+    console.log(valueArray);
+    return valueArray;
   }
 
   entries() {
     // returns an array that contains each key, value pair. Example: [[firstKey, firstValue], [secondKey, secondValue]]
+    const keyValueArray = [];
+
+    const Bucket = this.Bucket;
+    const bucketLength = this.Bucket.length;
+
+    // traverse array of buckets
+    for (let bucketIndex = 0; bucketIndex < bucketLength; bucketIndex++) {
+      let currentBucket = Bucket[bucketIndex];
+
+      if (currentBucket != undefined) {
+        // console.log(Bucket[i]);
+        const linkedListSize = currentBucket.size();
+        // console.log("not empty");
+
+        // traverse linked list
+        for (
+          let linkedListIndex = 0;
+          linkedListIndex < linkedListSize;
+          linkedListIndex++
+        ) {
+          const currentBucketCurrentListIndex =
+            currentBucket.at(linkedListIndex);
+          keyValueArray.push(currentBucketCurrentListIndex.value);
+        }
+      }
+    }
+
+    console.log(keyValueArray);
+    return keyValueArray;
   }
 }
 

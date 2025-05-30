@@ -26,6 +26,7 @@ test.set("kite", "pink");
 test.set("lion", "golden");
 
 console.log(test);
+test.length();
 
 test.get("grape");
 test.has("banana");
@@ -34,6 +35,14 @@ test.has("banana");
 test.remove("grape");
 test.has("grape");
 console.log(test);
+
+test.length();
+test.keys();
+test.values();
+test.entries();
+test.clear();
+console.log(test);
+test.length();
 
 // After populating your hash map with the data above, your hash map’s current load levels should now be at 0.75 (full capacity).
 
