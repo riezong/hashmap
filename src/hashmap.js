@@ -19,11 +19,24 @@ class HashMap {
     return hashCode;
   }
 
+  growth() {
+    this.capacity = this.capacity * 2;
+    console.log("grow capacity to: " + this.capacity);
+  }
+
+  redistribute() {
+    console.log("redistribute");
+    this.entries().forEach((currentValue) => {
+      this.set(currentValue[0], currentValue[1]);
+    });
+  }
+
   set(key, value) {
     // take key-value pair
     // convert key into hash code
     // use hash code to determine the appropriate bucket
     const bucketIndex = this.hash(key);
+    console.log("bucket: " + bucketIndex);
 
     // Linked List: Each bucket can be the head of a linked list. Each node in the linked list would store a [key, value] pair.
 
@@ -35,10 +48,36 @@ class HashMap {
       this.Bucket[bucketIndex].append([key, value]);
       console.log(this.Bucket[bucketIndex].toString());
     } else {
-      console.log(this.Bucket[bucketIndex].size());
-      this.Bucket[bucketIndex].append([key, value]);
-      console.log(this.Bucket[bucketIndex].toString());
-      return this.Bucket[bucketIndex];
+      let currentBucket = this.Bucket[bucketIndex];
+      const linkedListSize = currentBucket.size();
+      // traverse linked list
+      for (
+        let linkedListIndex = 0;
+        linkedListIndex < linkedListSize;
+        linkedListIndex++
+      ) {
+        const checkKey = currentBucket.at(linkedListIndex).value[0];
+        // console.log(checkKey, key);
+        if (checkKey == key) {
+          // Update
+          // console.log("hashmap has key: " + key);
+          currentBucket.at(linkedListIndex).value[1] = value;
+          console.log(this.Bucket[bucketIndex].toString());
+          // console.log(currentBucket.at(linkedListIndex).value[1]);
+          return this.Bucket[bucketIndex];
+        } else {
+          // New entry
+          // grow your buckets to double their capacity when your hash map reaches the load factor
+          if (this.length() >= this.capacity * this.loadFactor) {
+            this.growth();
+            this.redistribute();
+          }
+          console.log(this.Bucket[bucketIndex].size());
+          this.Bucket[bucketIndex].append([key, value]);
+          console.log(this.Bucket[bucketIndex].toString());
+          return this.Bucket[bucketIndex];
+        }
+      }
     }
 
     // Then, you'll add the [key, value] pair to that bucket's data structure.
@@ -164,7 +203,6 @@ class HashMap {
       }
     }
 
-    console.log(counter);
     return counter;
   }
 
