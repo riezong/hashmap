@@ -80,19 +80,24 @@ class LinkedList {
   }
 
   pop() {
-    // 1. get the second last Node
-    let size = this.size();
-    // console.log(size);
-    let target = size - 2;
-    // console.log(target);
-    // console.log(this.at(target));
+    // if list size is <= 1, revert to null
+    if (this.size() <= 1) {
+      this.firstNode = null;
+    } else {
+      // 1. get the second last Node
+      let size = this.size();
+      // console.log(size);
+      let target = size - 2;
+      // console.log(target);
+      // console.log(this.at(target));
 
-    // 2. change that Node.nextNode to null
-    this.at(target).nextNode = null;
-    // console.log(this.at(target));
+      // 2. change that Node.nextNode to null
+      this.at(target).nextNode = null;
+      // console.log(this.at(target));
 
-    // 3. return new last Node
-    return this.tail();
+      // 3. return new last Node
+      return this.tail();
+    }
   }
 
   contains(value) {
@@ -156,8 +161,7 @@ class LinkedList {
     let prev = index - 1;
     let next = index + 1;
     if (this.size() <= 1) {
-      this.pop();
-      return this.at(prev).nextNode;
+      return this.pop();
     } else {
       return (this.at(prev).nextNode = this.at(next));
     }
