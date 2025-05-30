@@ -28,13 +28,18 @@ test.set("lion", "golden");
 console.log(test);
 
 test.get("grape");
-
 test.has("banana");
+test.remove("banana");
+test.has("banana");
+test.remove("grape");
+test.has("grape");
+console.log(test);
 
 // After populating your hash map with the data above, your hash map’s current load levels should now be at 0.75 (full capacity).
 
 // Now with a full hash map, try overwriting a few nodes using set(key, value). This should only overwrite the existing values of your nodes and not add new ones, so length() should still return the same value and capacity should remain the same.
-// test.set();
+// test.set("apple", "green");
+// console.log(test);
 // test.length();
 
 // After that, populate your hash map with the last node below. This will make your load levels exceed your load factor, triggering your hash map’s growth functionality and doubling its capacity:

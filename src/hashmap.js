@@ -32,7 +32,6 @@ class HashMap {
     if (this.Bucket[bucketIndex] === undefined) {
       // console.log("empty bucket");
       this.Bucket[bucketIndex] = new LinkedList();
-      // console.log(this.Bucket[bucketIndex].size());
       this.Bucket[bucketIndex].append([key, value]);
       console.log(this.Bucket[bucketIndex].toString());
     } else {
@@ -79,6 +78,7 @@ class HashMap {
         const linkedListSize = Bucket[i].size();
         // console.log("not empty");
 
+        // traverse linked list
         for (let j = 0; j < linkedListSize; j++) {
           const checkKey = Bucket[i].at(j).value[0];
           // console.log(checkKey, key);
@@ -97,6 +97,44 @@ class HashMap {
 
   remove(key) {
     // takes a key as an argument. If the given key is in the hash map, it should remove the entry with that key and return true. If the key isn’t in the hash map, it should return false.
+    const Bucket = this.Bucket;
+    const bucketLength = this.Bucket.length;
+
+    // traverse array of buckets
+    for (let bucketIndex = 0; bucketIndex < bucketLength; bucketIndex++) {
+      let currentBucket = Bucket[bucketIndex];
+
+      if (currentBucket != undefined) {
+        // console.log(Bucket[i]);
+        const linkedListSize = currentBucket.size();
+        // console.log("not empty");
+
+        // traverse linked list
+        for (
+          let linkedListIndex = 0;
+          linkedListIndex < linkedListSize;
+          linkedListIndex++
+        ) {
+          const checkKey = currentBucket.at(linkedListIndex).value[0];
+          // console.log(checkKey, key);
+          if (checkKey == key) {
+            console.log("hashmap has key: " + key);
+            if (linkedListSize <= 1) {
+              currentBucket.firstNode = null;
+            } else if (linkedListIndex == 0) {
+              currentBucket.firstNode = currentBucket.at(1);
+            } else {
+              currentBucket.removeAt(linkedListIndex);
+              console.log(currentBucket);
+            }
+
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
   }
 
   length() {
